@@ -3,8 +3,10 @@ package com.example.hotnewsapp.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,48 +16,34 @@ import com.example.hotnewsapp.databinding.ActivityLoginBinding;
 import com.example.hotnewsapp.entity.LoginUser;
 import com.example.hotnewsapp.entity.State;
 import com.example.hotnewsapp.model.HttpUtils;
+import com.example.hotnewsapp.viewmodel.LoginViewModel;
 
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = "MYTAG";
 
     State state;
+    ActivityLoginBinding activityLoginBinding;
+    LoginViewModel loginViewModel=new LoginViewModel();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        activityLoginBinding=DataBindingUtil.setContentView(this,R.layout.activity_login);
+
+        initViewModel(this);
+
+        activityLoginBinding.setLoginViewModel(loginViewModel);
 
     }
 
-    public void loginAct(View view){
-
-        EditText passwordET=(EditText)findViewById(R.id.password);
-        EditText emailET=(EditText)findViewById(R.id.email);
-        String password=passwordET.getText().toString();
-        String email=emailET.getText().toString();
-
-        Thread thread=new Thread(new Runnable() {
-            @Override
-            public void run() {
-                state= HttpUtils.login("http://47.106.76.106:8080/hotNewsSys/login?email="+email+"&password="+password);
-            }
-        });
-        thread.start();
-        try{
-            thread.join();
-            Thread.sleep(20);
-        }catch (InterruptedException e){
-            e.printStackTrace();
+    private void initViewModel(Context context){
+        LoginUser loginUser=(LoginUser)getIntent().getSerializableExtra("loginUser");
+        if (loginUser==null){
+            Log.e(TAG, "initViewModel: 非跳转用户" );
+        }else{
+            loginViewModel.setEmail(loginUser.getEmail());
         }
-
-        if (state.getCode()==200){
-            Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
-            LoginUser loginUser=new LoginUser(email,password);
-
-            startActivity(intent);
-        }
-
-        Toast.makeText(this, state.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -7,21 +7,10 @@ import java.util.List;
 
 public class NewsModel {
 
-    private List<News> newsList=new ArrayList<>();
+    private List<News> newsLis;
 
-    public List<News> getNews(){
-        return newsList;
-    }
-
-    public void setNewsList(List<News> newsList){
-        this.newsList=newsList;
-    }
-
-
-    public interface OnCallBack{
-        void onSuccess(News news);
-
-        void onFailed(String errorInfo);
+    public List<News> getNewsByType(String type){
+        return HttpUtils.getNews(type);
     }
 
 }

@@ -16,8 +16,8 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/home_view_pager_style"
-            android:background="#E0E0E0"/>
+            style="@style/home_viewpager_style"
+            />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/home_view_pager"

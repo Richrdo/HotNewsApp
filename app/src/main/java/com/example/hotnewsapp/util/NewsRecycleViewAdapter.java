@@ -19,7 +19,13 @@ import com.example.hotnewsapp.view.NewsDetailActivity;
 
 import java.util.List;
 
-public class NewsRecycleViewAdapter extends RecyclerView.Adapter<NewsRecycleViewAdapter.ViewHolder> {
+public class
+
+
+
+
+
+NewsRecycleViewAdapter extends RecyclerView.Adapter<NewsRecycleViewAdapter.ViewHolder> {
 
     private Context context;
     private List<News> newsList;

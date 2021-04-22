@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="home_view_pager_style" parent="Widget.Design.TabLayout">
-        <item name="tabBackground">@color/white</item>
+    <style name="home_viewpager_style" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorColor">#ff0000</item>
         <item name="tabIndicatorHeight">2dp</item>
         <item name="tabMode">fixed</item>
-        <item name="tabSelectedTextColor">#d0e3dd</item>
-        <item name="android:textSize">15sp</item>
+        <item name="tabSelectedTextColor">#EE3B3B</item>
+        <item name="tabTextColor">@color/black</item>
+        <item name="tabBackground">@drawable/tab_background</item>
+        <item name="tabTextAppearance">@android:style/TextAppearance.Holo.Medium</item>
+        <item name="tabRippleColor">@color/white</item>
     </style>
 
 </resources>

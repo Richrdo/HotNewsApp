@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         
 
         Intent intent;
-        if (loginUser==null){
+        if (loginUser==null||loginUser.getEmail()==null){
             Log.d("TAG", "未登录");
             intent=new Intent(MainActivity.this, LoginActivity.class);
         }else{

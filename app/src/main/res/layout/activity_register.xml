@@ -5,100 +5,113 @@
 
     <data>
         <variable
-            name="loginViewModel"
-            type="com.example.hotnewsapp.viewmodel.LoginViewModel" />
+            name="registerViewModel"
+            type="com.example.hotnewsapp.viewmodel.RegisterViewModel" />
+
     </data>
 
     <LinearLayout
-        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:textSize="35sp"
-            android:text="登录"
+            android:textSize="35dp"
+            android:text="注册"
             android:layout_marginTop="100dp"/>
 
         <LinearLayout
-            android:layout_width="320dp"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp">
+            android:layout_marginTop="70dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="邮箱 | "
-                android:textSize="20sp"/>
+                android:text="昵        称 | "
+                android:textSize="20dp"/>
 
             <EditText
-                android:id="@+id/login_email"
+                android:id="@+id/register_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:text="@={loginViewModel.email}"
-                android:selectAllOnFocus="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                android:text="@={registerViewModel.name}"
+                 />
         </LinearLayout>
-
         <LinearLayout
-            android:layout_width="320dp"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="密码 | "
-                android:textSize="20sp"/>
+                android:text="邮        箱 | "
+                android:textSize="20dp"/>
+
             <EditText
-                android:id="@+id/login_password"
+                android:id="@+id/register_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={loginViewModel.password}"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="actionDone"
-                android:inputType="textPassword"
-                android:selectAllOnFocus="true"
-                app:layout_constraintTop_toBottomOf="@+id/email" />
-
+                android:inputType="textEmailAddress"
+                android:text="@={registerViewModel.email}"/>
         </LinearLayout>
-
         <LinearLayout
-            android:id="@+id/login_btn"
-            android:layout_width="320dp"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="密        码 | "
+                android:textSize="20dp"/>
+            <EditText
+                android:id="@+id/register_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:text="@={registerViewModel.password}"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="确认密码 | "
+                android:textSize="20dp"/>
+            <EditText
+                android:id="@+id/register_re_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:text="@={registerViewModel.re_password}"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="340dp"
             android:layout_height="50dp"
             app:layout_constraintTop_toBottomOf="@+id/password"
             android:orientation="vertical"
-            android:onClick="@{loginViewModel::loginAct}"
+            android:onClick="@{registerViewModel::registerAct}"
             android:enabled="true"
             android:gravity="center"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="70dp"
             android:background="#EE3B3B">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/action_sign_in"
+                android:text="注册"
                 android:textColor="@color/white"
-                android:textSize="22sp"/>
+                android:textSize="22dp"/>
         </LinearLayout>
 
-        <TextView
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="注册"
-            android:textSize="20sp"
-            android:onClick="@{loginViewModel::goToRegister}"/>
 
         <ProgressBar
-            android:id="@+id/loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -112,6 +125,6 @@
             app:layout_constraintStart_toStartOf="@+id/password"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.3" />
-    </LinearLayout>
 
+    </LinearLayout>
 </layout>
