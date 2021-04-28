@@ -11,6 +11,7 @@ import androidx.lifecycle.AndroidViewModel;
 
 import com.example.hotnewsapp.databinding.FragmentDomesticBinding;
 import com.example.hotnewsapp.databinding.FragmentInternationalBinding;
+import com.example.hotnewsapp.databinding.FragmentSearchActionBinding;
 import com.example.hotnewsapp.databinding.FragmentSocialBinding;
 import com.example.hotnewsapp.model.HttpUtils;
 import com.example.hotnewsapp.model.NewsModel;
@@ -31,21 +32,28 @@ public class NewsRecyclerViewModel extends AndroidViewModel {
         super(application);
         NewsRecycleViewAdapter adapter=(NewsRecycleViewAdapter)binding.newsRcyListInternational.getAdapter();
         assert adapter != null;
-        adapter.putNewsList(newsModel.getNewsByType("international"));
+        adapter.putNewsList(newsModel.getNewsByType("international"),0);
     }
 
     public NewsRecyclerViewModel(@NonNull Application application, FragmentSocialBinding binding) {
         super(application);
         NewsRecycleViewAdapter adapter=(NewsRecycleViewAdapter)binding.newsListSocial.getAdapter();
         assert adapter != null;
-        adapter.putNewsList(newsModel.getNewsByType("social"));
+        adapter.putNewsList(newsModel.getNewsByType("social"),0);
     }
 
     public NewsRecyclerViewModel(@NonNull Application application, FragmentDomesticBinding binding) {
         super(application);
         NewsRecycleViewAdapter adapter=(NewsRecycleViewAdapter)binding.newsListDomestic.getAdapter();
         assert adapter != null;
-        adapter.putNewsList(newsModel.getNewsByType("domestic"));
+        adapter.putNewsList(newsModel.getNewsByType("domestic"),0);
+    }
+
+    public NewsRecyclerViewModel(@NonNull Application application, FragmentSearchActionBinding binding) {
+        super(application);
+        NewsRecycleViewAdapter adapter=(NewsRecycleViewAdapter)binding.randomRv.getAdapter();
+        assert adapter != null;
+        adapter.putNewsList(newsModel.getNRandomNews(12),1);
     }
 
 }

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hotnewsapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HotNewsApp">
-        <activity android:name=".view.RegisterActivity"></activity>
+        <activity android:name=".view.CollectActivity"></activity>
+        <activity android:name=".view.UserInfoActivity" />
+        <activity android:name=".view.SearchActivity" />
+        <activity android:name=".view.RegisterActivity" />
         <activity android:name=".view.HomeActivity" />
         <activity android:name=".view.NewsDetailActivity" />
         <activity android:name=".view.LoginActivity" /> <!-- <activity -->
@@ -24,7 +29,5 @@
             </intent-filter>
         </activity>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

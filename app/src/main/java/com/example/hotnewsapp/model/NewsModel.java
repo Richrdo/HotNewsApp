@@ -13,4 +13,7 @@ public class NewsModel {
         return HttpUtils.getNews(type);
     }
 
+    public List<News> getNRandomNews(int n){
+        return HttpUtils.getNRandomNews(n);
+    }
 }

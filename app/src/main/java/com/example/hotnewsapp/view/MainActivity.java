@@ -21,13 +21,8 @@ public class MainActivity extends AppCompatActivity {
         
 
         Intent intent;
-        if (loginUser==null||loginUser.getEmail()==null){
-            Log.d("TAG", "未登录");
-            intent=new Intent(MainActivity.this, LoginActivity.class);
-        }else{
-            Log.d("TAG", "已有账户："+loginUser.toString());
-            intent=new Intent(MainActivity.this,HomeActivity.class);
-        }
+       // Log.d("TAG", "已有账户："+loginUser.toString());
+        intent=new Intent(MainActivity.this,HomeActivity.class);
         startActivity(intent);
     }
 }

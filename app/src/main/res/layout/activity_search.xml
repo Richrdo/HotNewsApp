@@ -18,7 +18,7 @@
             android:gravity="center_vertical">
             <LinearLayout
                 android:id="@+id/search"
-                android:layout_width="380dp"
+                android:layout_width="320dp"
                 android:layout_height="35dp"
                 android:background="@drawable/rounded_corner"
                 android:layout_marginLeft="15dp"
@@ -28,31 +28,29 @@
                     android:layout_width="30dp"
                     android:layout_height="20dp"
                     android:src="@mipmap/search_black" />
-                <TextView
-                    android:id="@+id/home_random_news_text"
+                <EditText
+                    android:id="@+id/search_edit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="新闻要点"
+                    android:hint="新闻要点"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    android:singleLine="true"
-                    android:ellipsize="marquee"
+                    android:background="@null"
                     />
             </LinearLayout>
-
-
+            <Button
+                android:id="@+id/search_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/borderlessButtonStyle"
+                android:text="搜索"
+                android:textSize="20sp"/>
         </LinearLayout>
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
+        <FrameLayout
+            android:id="@+id/search_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/home_viewpager_style"
-            />
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/home_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
+            android:layout_height="0dp"
+            android:layout_weight="1">
+        </FrameLayout>
     </LinearLayout>
 </layout>

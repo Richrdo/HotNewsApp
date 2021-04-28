@@ -1,98 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
-        <variable
-            name="userViewModel"
-            type="com.example.hotnewsapp.viewmodel.UserViewModel" />
+
     </data>
+
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#EDEDED"
+        android:orientation="vertical"
         >
-
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="@color/white"
-          android:gravity="center_horizontal">
-
-          <LinearLayout
-              android:layout_width="370dp"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              >
-              <LinearLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="30dp"
-                  android:orientation="horizontal"
-                  android:layout_marginTop="15dp"
-                  >
-                  <TextView
-                      android:gravity="center_vertical"
-                      android:layout_width="0dp"
-                      android:layout_height="match_parent"
-                      android:layout_weight="1"
-                      android:textColor="@color/black"
-                      android:text="邮  箱"
-                      android:textSize="20sp"/>
-                  <TextView
-                      android:id="@+id/user_email"
-                      android:gravity="center_vertical|right"
-                      android:layout_width="0dp"
-                      android:layout_height="match_parent"
-                      android:layout_weight="2"
-                      android:text="@={userViewModel.email}"
-                      android:textSize="20sp"/>
-              </LinearLayout>
-              <LinearLayout
-                  android:layout_marginTop="15dp"
-                  android:layout_width="match_parent"
-                  android:layout_height="1dp"
-                  android:background="#CFCFCF"/>
-              <LinearLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="30dp"
-                  android:orientation="horizontal"
-                  android:layout_marginTop="15dp"
-                  android:layout_marginBottom="15dp"
-                  >
-                  <TextView
-                      android:gravity="center_vertical"
-                      android:layout_width="0dp"
-                      android:layout_height="match_parent"
-                      android:layout_weight="1"
-                      android:text="昵  称"
-                      android:textSize="20sp"
-                      android:textColor="@color/black"/>
-                  <TextView
-                      android:id="@+id/user_name"
-                      android:gravity="center_vertical|right"
-                      android:layout_width="0dp"
-                      android:layout_height="match_parent"
-                      android:layout_weight="2"
-                      android:text="@={userViewModel.name}"
-                      android:textSize="20sp"/>
-              </LinearLayout>
-
-          </LinearLayout>
-      </LinearLayout>
         <LinearLayout
-            android:onClick="@{userViewModel::signOutAct}"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@color/white"
-            android:layout_marginTop="15dp"
-            android:gravity="center">
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="退出登录"
-              android:textColor="@color/black"
-              android:textSize="20sp"/>
+            android:gravity="center_vertical">
+            <LinearLayout
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@mipmap/user" />
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="立即登录"
+                    android:textSize="20dp"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/right"
+                    android:layout_marginRight="10dp"/>
+            </LinearLayout>
         </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:layout_marginTop="5dp">
+            <LinearLayout
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@mipmap/collect" />
+                <TextView
+                    android:id="@+id/user_collect"
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我的收藏"
+                    android:textSize="20dp"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/right"
+                    android:layout_marginRight="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
 </layout>

@@ -46,6 +46,6 @@ public class UserFragment extends Fragment {
     }
 
     private void initView(){
-        fragmentUserBinding.setUserViewModel(new UserViewModel(loginUser.getEmail()));
+      //  fragmentUserBinding.setUserViewModel(new UserViewModel(loginUser.getEmail()));
     }
 }
