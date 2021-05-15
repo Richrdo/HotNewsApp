@@ -1,4 +1,4 @@
-package com.example.hotnewsapp.view;
+package com.example.hotnewsapp.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

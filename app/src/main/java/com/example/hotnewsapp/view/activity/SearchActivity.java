@@ -1,4 +1,4 @@
-package com.example.hotnewsapp.view;
+package com.example.hotnewsapp.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -15,8 +15,10 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.example.hotnewsapp.R;
 import com.example.hotnewsapp.databinding.ActivitySearchBinding;
+import com.example.hotnewsapp.view.fragment.SearchActionFragment;
+import com.example.hotnewsapp.view.fragment.SearchResultFragment;
 
-public class SearchActivity extends AppCompatActivity implements View.OnClickListener,SearchActionFragment.FragmentInteraction{
+public class SearchActivity extends AppCompatActivity implements View.OnClickListener, SearchActionFragment.FragmentInteraction {
     private ActivitySearchBinding binding;
     private Fragment mFrag1;
     private Fragment mFrag2;

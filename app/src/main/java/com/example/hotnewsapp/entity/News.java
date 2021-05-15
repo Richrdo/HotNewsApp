@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 public class News extends BaseObservable implements Serializable {
 
+    private String id;
     private String title;
     private String content;
     private String source;
@@ -22,6 +23,14 @@ public class News extends BaseObservable implements Serializable {
     public void setTitle(String title) {
         this.title = title;
         notifyPropertyChanged(BR.title);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Bindable

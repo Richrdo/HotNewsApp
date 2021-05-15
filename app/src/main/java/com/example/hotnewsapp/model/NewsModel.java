@@ -16,4 +16,8 @@ public class NewsModel {
     public List<News> getNRandomNews(int n){
         return HttpUtils.getNRandomNews(n);
     }
+
+    public List<News> getCollectNews(String email){
+        return HttpUtils.getCollectNews(email);
+    }
 }

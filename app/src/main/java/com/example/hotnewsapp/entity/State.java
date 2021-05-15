@@ -2,7 +2,9 @@ package com.example.hotnewsapp.entity;
 
 import androidx.annotation.NonNull;
 
-public class State {
+import java.io.Serializable;
+
+public class State implements Serializable {
     private int code;
     private String message;
 

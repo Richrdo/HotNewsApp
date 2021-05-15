@@ -21,74 +21,93 @@ public class HttpUtils {
     public static final String TAG="MyTag"+"HttpUtils";
     private static String resultStr;
 
+    static List<News> newsList=new ArrayList<>();
+    static Gson gson=new Gson();
+    static State result=new State();
+
+
 
     //向指定URL发送指定消息，并返回从服务器端获取到的String类型的数据
     public static String send(String strUrl,String content,String method,String contentType){
-        String result;
-        try{
-            URL url=new URL(strUrl);
-            HttpURLConnection connection=(HttpURLConnection)url.openConnection();
-            //设置get或者post
-            connection.setRequestMethod(method);
-            connection.setConnectTimeout(5000);
-            connection.setRequestProperty("Content-Type",contentType);
-            connection.addRequestProperty("Connection","Keep-Alive");
-            OutputStream os=connection.getOutputStream();
-            Log.e(TAG, "send: "+content );
-            os.write(content.getBytes());
-            os.flush();
-            os.close();
-            if (connection.getResponseCode()==200){
-                result=Tools.streamToString(connection.getInputStream());
-                Log.d(TAG, "send: "+result);
-                return result;
-            }else{
-                result="error";
-                Log.d(TAG, "send: "+connection.getResponseCode());
-                return result;
+        Thread thread=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    URL url=new URL(strUrl);
+                    HttpURLConnection connection=(HttpURLConnection)url.openConnection();
+                    //设置get或者post
+                    connection.setRequestMethod(method);
+                    connection.setConnectTimeout(5000);
+                    connection.setRequestProperty("Content-Type",contentType);
+                    connection.addRequestProperty("Connection","Keep-Alive");
+                    OutputStream os=connection.getOutputStream();
+                    Log.e(TAG, "send: "+content );
+                    os.write(content.getBytes());
+                    os.flush();
+                    os.close();
+                    if (connection.getResponseCode()==200){
+                        resultStr=Tools.streamToString(connection.getInputStream());
+                        Log.d(TAG, "send: "+result);
+                    }else{
+                        resultStr="error";
+                        Log.d(TAG, "send: "+connection.getResponseCode());
+                    }
+                } catch (SocketTimeoutException e){
+                    resultStr="NetWorkBroken";
+                } catch (IOException e){
+                    e.printStackTrace();
+                    resultStr="other Error";
+                }
             }
-        } catch (SocketTimeoutException e){
-            result="NetWorkBroken";
-            return result;
-        } catch (IOException e){
+        });
+        thread.start();
+        try{
+            thread.join();
+            Thread.sleep(20);
+        }catch (InterruptedException e){
             e.printStackTrace();
-            result="other Error";
-            return result;
         }
+        return resultStr;
     }
 
     public static String send(String strUrl){
-        String result;
-        try{
-            URL url=new URL(strUrl);
-            HttpURLConnection connection=(HttpURLConnection)url.openConnection();
-            connection.setConnectTimeout(5000);
-            connection.setRequestMethod("GET");
-            connection.addRequestProperty("Connection","Keep-Alive");
-            if (connection.getResponseCode()==200){
-                result=Tools.streamToString(connection.getInputStream());
-                Log.d(TAG, "send: "+result);
-                return result;
-            }else{
-                result="error";
-                Log.d(TAG, "send: "+connection.getResponseCode());
-                return result;
+        Thread thread=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    URL url=new URL(strUrl);
+                    HttpURLConnection connection=(HttpURLConnection)url.openConnection();
+                    connection.setConnectTimeout(5000);
+                    connection.setRequestMethod("GET");
+                    connection.addRequestProperty("Connection","Keep-Alive");
+                    if (connection.getResponseCode()==200){
+                        resultStr=Tools.streamToString(connection.getInputStream());
+                        Log.d(TAG, "send: "+result);
+                    }else{
+                        resultStr="error";
+                        Log.d(TAG, "send: "+connection.getResponseCode());
+                    }
+                } catch (SocketTimeoutException e){
+                    resultStr="NetWorkBroken";
+                } catch (IOException e){
+                    e.printStackTrace();
+                    resultStr="other Error";
+                }
             }
-        } catch (SocketTimeoutException e){
-            result="NetWorkBroken";
-            return result;
-        } catch (IOException e){
+        });
+        thread.start();
+        try{
+            thread.join();
+            Thread.sleep(20);
+        }catch (InterruptedException e){
             e.printStackTrace();
-            result="other Error";
-            return result;
         }
+        return resultStr;
     }
 
 
     //登录操作
     public static State login(String strUrl){
-        State result=new State();
-        Gson gson=new Gson();
         resultStr=send(strUrl," ","POST","application/json");
         if (resultStr.equals("NetWorkBroken")){
             result.setCode(404);
@@ -104,69 +123,31 @@ public class HttpUtils {
 
     //根据获取到的String转化为列表
     public static List<News> getNews(String type){
-        List<News> newsList=new ArrayList<>();
-        Gson gson=new Gson();
         String strUrl="http://47.106.76.106:8080/hotNewsSys/news/"+type;
-        Thread thread=new Thread(new Runnable() {
-            @Override
-            public void run() {
-                resultStr=send(strUrl," ","POST","application/json");
-                System.out.println("新闻string为:"+resultStr);
-            }
-        });
-        thread.start();
-        try{
-            thread.join();
-            Thread.sleep(20);
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
+        resultStr=send(strUrl," ","POST","application/json");
         newsList=gson.fromJson(resultStr,new TypeToken<List<News>>(){}.getType());
         return newsList;
     }
 
     //根据关键字查询
     public static List<News> getNewsByKey(String key){
-        List<News> newsList=new ArrayList<>();
-        Gson gson=new Gson();
         String strUrl="http://47.106.76.106:8080/hotNewsSys/news/research?keywords="+key;
-        Thread thread=new Thread(new Runnable() {
-            @Override
-            public void run() {
-                resultStr=send(strUrl);
-                System.out.println("新闻string为:"+resultStr);
-            }
-        });
-        thread.start();
-        try{
-            thread.join();
-            Thread.sleep(20);
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
+        resultStr=send(strUrl);
         newsList=gson.fromJson(resultStr,new TypeToken<List<News>>(){}.getType());
         return newsList;
     }
 
     //随机获取N条新闻
     public static List<News> getNRandomNews(int n){
-        List<News> newsList=new ArrayList<>();
-        Gson gson=new Gson();
         String strUrl="http://47.106.76.106:8080/hotNewsSys/news/getNHotNews?number="+n;
-        Thread thread=new Thread(new Runnable() {
-            @Override
-            public void run() {
-                resultStr=send(strUrl);
-                System.out.println("新闻string为:"+resultStr);
-            }
-        });
-        thread.start();
-        try{
-            thread.join();
-            Thread.sleep(20);
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
+        resultStr=send(strUrl);
+        newsList=gson.fromJson(resultStr,new TypeToken<List<News>>(){}.getType());
+        return newsList;
+    }
+
+    public static List<News> getCollectNews(String email){
+        String strUrl="http://47.106.76.106:8080/hotNewsSys/favorites/getFav?email="+email;
+        resultStr=send(strUrl);
         newsList=gson.fromJson(resultStr,new TypeToken<List<News>>(){}.getType());
         return newsList;
     }

@@ -4,13 +4,32 @@ import com.example.hotnewsapp.entity.LoginUser;
 import com.example.hotnewsapp.entity.State;
 import com.google.gson.Gson;
 
-public class UserModel {
+import java.io.Serializable;
 
-    Gson gson=new Gson();
-    State state;
+public class UserModel implements Serializable {
 
-    public String getUserMessage(String email){
-        LoginUser loginUser=new LoginUser();
+    private static LoginUser loginUser=null;
+    static Gson gson=new Gson();
+    static State state;
+
+    public LoginUser getLoginUser() {
+        return loginUser;
+    }
+
+    public void setLoginUser(LoginUser loginUser) {
+        this.loginUser = loginUser;
+    }
+
+    public String getLoginUserEmail(){
+        return  loginUser.getEmail();
+    }
+
+    public String getLoginUserName(){
+        return getUserMessage(loginUser.getEmail());
+    }
+
+    public static String getUserMessage(String email){
+        loginUser=new LoginUser();
         loginUser.setEmail(email);
         Thread thread=new Thread(new Runnable() {
             @Override

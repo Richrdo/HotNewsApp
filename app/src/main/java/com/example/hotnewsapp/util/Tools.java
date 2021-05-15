@@ -2,10 +2,14 @@ package com.example.hotnewsapp.util;
 
 import android.util.Log;
 
+import com.example.hotnewsapp.entity.LoginUser;
+
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 public class Tools {
+
+    public static LoginUser loginUser=null;
 
     //将输入流转换为String
     public static String streamToString(InputStream stream){
@@ -26,5 +30,6 @@ public class Tools {
         }
         return new String(bytes);
     }
+
 
 }

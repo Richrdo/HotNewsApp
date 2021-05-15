@@ -1,4 +1,4 @@
-package com.example.hotnewsapp.view;
+package com.example.hotnewsapp.view.fragment;
 
 import android.app.Activity;
 import android.content.Context;

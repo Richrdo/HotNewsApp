@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -16,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hotnewsapp.R;
 import com.example.hotnewsapp.entity.News;
-import com.example.hotnewsapp.view.NewsDetailActivity;
+import com.example.hotnewsapp.view.activity.NewsDetailActivity;
 
 import java.util.List;
 
@@ -32,6 +30,7 @@ public class NewsRecycleViewAdapter extends RecyclerView.Adapter<NewsRecycleView
         this.newsList=newsList;
         this.type=type;
     }
+
     @Override
     public int getItemViewType(int position) {
         if ( type== 0) {
@@ -40,50 +39,44 @@ public class NewsRecycleViewAdapter extends RecyclerView.Adapter<NewsRecycleView
 
 
     }
+
     public NewsRecycleViewAdapter(Context context){
         this.context=context;
     }
 
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ViewHolder viewHolder;
+
         switch (viewType) {
+//            主页展示
             case HOME:
                 ViewDataBinding homeBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.recycleview_news_item, parent, false);
-                ViewHolder homeViewHolder = new ViewHolder(homeBinding);
+                viewHolder = new ViewHolder(homeBinding);
                 View home=LayoutInflater.from(parent.getContext()).inflate(R.layout.recycleview_news_item,parent,false);
-                homeViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int position=homeViewHolder.getAdapterPosition();
-                        News news=newsList.get(position);
-                        Intent intent=new Intent(context, NewsDetailActivity.class);
-                        intent.putExtra("news_to_show",news);
-                        context.startActivity(intent);
-                    }
-                });
-                return  homeViewHolder;
-
+                break;
+//             搜索页下方推荐
             case INTRO:
                 ViewDataBinding introBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.layout_search_introduce_item, parent, false);
-                ViewHolder introViewHolder = new ViewHolder(introBinding);
+                viewHolder = new ViewHolder(introBinding);
                 View intro=LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_search_introduce_item,parent,false);
-                introViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int position=introViewHolder.getAdapterPosition();
-                        News news=newsList.get(position);
-                       // Intent intent=new Intent(context, NewsDetailActivity.class);
-                        //intent.putExtra("news_to_show",news);
-                        //context.startActivity(intent);
-                    }
-                });
-                return  introViewHolder;
-
+                break;
             default:
                 return null;
         }
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position=viewHolder.getAdapterPosition();
+                News news=newsList.get(position);
+                Intent intent=new Intent(context, NewsDetailActivity.class);
+                intent.putExtra("news_to_show",news);
+                v.getContext().startActivity(intent);
+            }
+        });
+        return viewHolder;
     }
 
     @Override

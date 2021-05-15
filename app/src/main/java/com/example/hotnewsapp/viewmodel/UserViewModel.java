@@ -1,9 +1,7 @@
 package com.example.hotnewsapp.viewmodel;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -11,19 +9,20 @@ import androidx.databinding.Bindable;
 import com.example.hotnewsapp.R;
 import com.example.hotnewsapp.entity.LoginUser;
 import com.example.hotnewsapp.model.UserModel;
-import com.example.hotnewsapp.view.LoginActivity;
+import com.example.hotnewsapp.util.Tools;
+import com.example.hotnewsapp.view.activity.CollectActivity;
+import com.example.hotnewsapp.view.activity.HomeActivity;
+import com.example.hotnewsapp.view.activity.LoginActivity;
+import com.example.hotnewsapp.view.activity.UserInfoActivity;
 
-public class UserViewModel extends BaseObservable {
+import java.io.Serializable;
 
-    UserModel userModel=new UserModel();
+public class UserViewModel extends BaseObservable implements Serializable {
 
-    private String name;
-    private String email;
+    LoginUser loginUser;
 
-    public UserViewModel(String email){
-         setEmail(email);
-         setName(userModel.getUserMessage(email));
-    }
+    String name;
+    String email;
 
     @Bindable
     public String getName() {
@@ -45,12 +44,35 @@ public class UserViewModel extends BaseObservable {
         notifyPropertyChanged(R.id.user_email);
     }
 
-    public void signOutAct(View view){
-        this.email=null;
-        this.name=null;
-        Toast.makeText(view.getContext(),"已退出!",Toast.LENGTH_SHORT).show();
-        Intent intent=new Intent(view.getContext(), LoginActivity.class);
-        intent.putExtra("loginUser",new LoginUser());
+    public void setLoginUser(LoginUser loginUser){
+        this.loginUser=loginUser;
+        setName(UserModel.getUserMessage(loginUser.getEmail()));
+        setEmail(loginUser.getEmail());
+    }
+
+    //    个人信息页面
+    public void showUserInfo(View view){
+        Intent intent;
+        if (loginUser==null){
+            intent=new Intent(view.getContext(),LoginActivity.class);
+        }else {
+            intent=new Intent(view.getContext(), UserInfoActivity.class);
+
+        }
         view.getContext().startActivity(intent);
     }
+
+//    退出登入
+    public void signOutAct(View view){
+        Intent intent=new Intent(view.getContext(), HomeActivity.class);
+        Tools.loginUser=null;
+        view.getContext().startActivity(intent);
+    }
+
+    //查看收藏
+    public void showCollect(View view){
+        Intent intent=new Intent(view.getContext(),CollectActivity.class);
+        view.getContext().startActivity(intent);
+    }
+
 }

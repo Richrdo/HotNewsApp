@@ -7,19 +7,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
-import androidx.lifecycle.AndroidViewModel;
 
 import com.example.hotnewsapp.R;
 import com.example.hotnewsapp.databinding.ActivityRegisterBinding;
 import com.example.hotnewsapp.entity.LoginUser;
 import com.example.hotnewsapp.entity.State;
-import com.example.hotnewsapp.model.HttpUtils;
 import com.example.hotnewsapp.model.RegisterModel;
-import com.example.hotnewsapp.view.HomeActivity;
-import com.example.hotnewsapp.view.LoginActivity;
+import com.example.hotnewsapp.view.activity.LoginActivity;
 
 import static com.example.hotnewsapp.model.HttpUtils.TAG;
 

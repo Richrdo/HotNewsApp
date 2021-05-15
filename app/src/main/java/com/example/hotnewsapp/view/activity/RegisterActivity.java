@@ -1,4 +1,4 @@
-package com.example.hotnewsapp.view;
+package com.example.hotnewsapp.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;

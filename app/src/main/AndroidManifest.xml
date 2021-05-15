@@ -12,16 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HotNewsApp">
-        <activity android:name=".view.CollectActivity"></activity>
-        <activity android:name=".view.UserInfoActivity" />
-        <activity android:name=".view.SearchActivity" />
-        <activity android:name=".view.RegisterActivity" />
-        <activity android:name=".view.HomeActivity" />
-        <activity android:name=".view.NewsDetailActivity" />
-        <activity android:name=".view.LoginActivity" /> <!-- <activity -->
-        <!-- android:name=".view.login.LoginActivity" -->
-        <!-- android:label="@string/title_activity_login" /> -->
-        <activity android:name=".view.MainActivity">
+        <activity android:name=".view.activity.CollectActivity"></activity>
+        <activity android:name=".view.activity.UserInfoActivity" />
+        <activity android:name=".view.activity.SearchActivity" />
+        <activity android:name=".view.activity.RegisterActivity" />
+        <activity android:name=".view.activity.HomeActivity" />
+        <activity android:name=".view.activity.NewsDetailActivity" />
+        <activity android:name=".view.activity.LoginActivity" />
+        <activity android:name=".view.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -9,6 +9,7 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableList;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.example.hotnewsapp.databinding.ActivityCollectBinding;
 import com.example.hotnewsapp.databinding.FragmentDomesticBinding;
 import com.example.hotnewsapp.databinding.FragmentInternationalBinding;
 import com.example.hotnewsapp.databinding.FragmentSearchActionBinding;
@@ -54,6 +55,13 @@ public class NewsRecyclerViewModel extends AndroidViewModel {
         NewsRecycleViewAdapter adapter=(NewsRecycleViewAdapter)binding.randomRv.getAdapter();
         assert adapter != null;
         adapter.putNewsList(newsModel.getNRandomNews(12),1);
+    }
+
+    public NewsRecyclerViewModel(@NonNull Application application, ActivityCollectBinding binding,String email) {
+        super(application);
+        NewsRecycleViewAdapter adapter=(NewsRecycleViewAdapter)binding.collectRv.getAdapter();
+        assert adapter != null;
+        adapter.putNewsList(newsModel.getCollectNews(email),0);
     }
 
 }

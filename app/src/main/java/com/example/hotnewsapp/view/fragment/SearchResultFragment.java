@@ -1,7 +1,6 @@
-package com.example.hotnewsapp.view;
+package com.example.hotnewsapp.view.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,8 +19,8 @@ import com.example.hotnewsapp.databinding.FragmentSearchResultBinding;
 import com.example.hotnewsapp.entity.News;
 import com.example.hotnewsapp.model.HttpUtils;
 import com.example.hotnewsapp.util.NewsRecycleViewAdapter;
+import com.example.hotnewsapp.view.activity.SearchActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

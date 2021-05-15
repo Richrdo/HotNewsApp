@@ -85,7 +85,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
-                        android:text="@={userViewModel.name}"
+                        android:text="@{userViewModel.name}"
                         android:textSize="20sp"/>
                 </LinearLayout>
 

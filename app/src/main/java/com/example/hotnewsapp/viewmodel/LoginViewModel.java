@@ -3,7 +3,6 @@ package com.example.hotnewsapp.viewmodel;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
@@ -13,15 +12,17 @@ import com.example.hotnewsapp.R;
 import com.example.hotnewsapp.entity.LoginUser;
 import com.example.hotnewsapp.entity.State;
 import com.example.hotnewsapp.model.HttpUtils;
-import com.example.hotnewsapp.view.HomeActivity;
-import com.example.hotnewsapp.view.LoginActivity;
-import com.example.hotnewsapp.view.RegisterActivity;
+import com.example.hotnewsapp.model.LoginModel;
+import com.example.hotnewsapp.util.Tools;
+import com.example.hotnewsapp.view.activity.HomeActivity;
+import com.example.hotnewsapp.view.activity.RegisterActivity;
 
 public class LoginViewModel extends BaseObservable {
 
     private String email;
     private String password;
     State state;
+    LoginModel loginModel=new LoginModel();
 
     @Bindable
     public String getEmail() {
@@ -43,35 +44,24 @@ public class LoginViewModel extends BaseObservable {
         notifyPropertyChanged(R.id.login_password);
     }
 
-    //跳转到注册页面
+    //注册点击事件
     public void goToRegister(View view){
         Context context=view.getContext();
         context.startActivity(new Intent(context, RegisterActivity.class));
     }
 
-//    登录
+//    登录点击事件
     public void loginAct(View view){
-        Thread thread=new Thread(new Runnable() {
-            @Override
-            public void run() {
-                state= HttpUtils.login("http://47.106.76.106:8080/hotNewsSys/login?email="+email+"&password="+password);
-            }
-        });
-        thread.start();
-        try{
-            thread.join();
-            Thread.sleep(20);
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
+        LoginUser loginUser=new LoginUser();
+        loginUser.setEmail(email);
+        loginUser.setPassword(password);
+        state=loginModel.login(loginUser);
         if (state.getCode()==200){
             Intent intent=new Intent(view.getContext(), HomeActivity.class);
-            LoginUser loginUser=new LoginUser();
-            loginUser.setEmail(email);
-            intent.putExtra("loginUser",loginUser);
+            Tools.loginUser=loginUser;
             view.getContext().startActivity(intent);
         }
-        Toast.makeText(view.getContext(), state.getMessage(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(view.getContext(), state.getMessage(), Toast.LENGTH_LONG).show();
     }
 
 }

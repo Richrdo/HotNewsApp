@@ -1,4 +1,4 @@
-package com.example.hotnewsapp.view;
+package com.example.hotnewsapp.view.fragment;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,18 +16,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hotnewsapp.R;
-import com.example.hotnewsapp.databinding.FragmentDomesticBinding;
-import com.example.hotnewsapp.databinding.FragmentInternationalBinding;
+import com.example.hotnewsapp.databinding.FragmentSocialBinding;
 import com.example.hotnewsapp.util.NewsRecycleViewAdapter;
 import com.example.hotnewsapp.viewmodel.NewsRecyclerViewModel;
 
-
-public class DomesticFragment extends Fragment {
+public class SocialFragment extends Fragment {
 
     private Activity mActivity;
-    FragmentDomesticBinding fragmentDomesticBinding;
-    private NewsRecyclerViewModel newsRecyclerViewModel;
+    private FragmentSocialBinding fragmentSocialBinding;
     private NewsRecycleViewAdapter newsRecycleViewAdapter;
+    private NewsRecyclerViewModel newsRecyclerViewModel;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -46,18 +44,21 @@ public class DomesticFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        fragmentDomesticBinding= FragmentDomesticBinding.inflate(inflater);
+        fragmentSocialBinding=FragmentSocialBinding.inflate(inflater);
 
         initView();
 
-        return fragmentDomesticBinding.getRoot();
+        return fragmentSocialBinding.getRoot();
     }
 
     private void initView(){
-        RecyclerView recyclerView=fragmentDomesticBinding.newsListDomestic;
+        RecyclerView recyclerView=fragmentSocialBinding.newsListSocial;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(newsRecycleViewAdapter);
-        newsRecyclerViewModel=new NewsRecyclerViewModel(mActivity.getApplication(),fragmentDomesticBinding);
-        fragmentDomesticBinding.setViewModel(newsRecyclerViewModel);
+
+        newsRecyclerViewModel=new NewsRecyclerViewModel(mActivity.getApplication(),fragmentSocialBinding);
+        fragmentSocialBinding.setViewModel(newsRecyclerViewModel);
+
     }
+
 }
