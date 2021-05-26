@@ -50,28 +50,24 @@ public class UserViewModel extends BaseObservable implements Serializable {
         setEmail(loginUser.getEmail());
     }
 
-    //    个人信息页面
-    public void showUserInfo(View view){
-        Intent intent;
-        if (loginUser==null){
-            intent=new Intent(view.getContext(),LoginActivity.class);
-        }else {
-            intent=new Intent(view.getContext(), UserInfoActivity.class);
-
-        }
-        view.getContext().startActivity(intent);
-    }
 
 //    退出登入
     public void signOutAct(View view){
         Intent intent=new Intent(view.getContext(), HomeActivity.class);
         Tools.loginUser=null;
+        UserModel.loginUser=null;
+        UserModel.collection=null;
         view.getContext().startActivity(intent);
     }
 
     //查看收藏
     public void showCollect(View view){
-        Intent intent=new Intent(view.getContext(),CollectActivity.class);
+        Intent intent;
+        if (Tools.loginUser==null){
+            intent=new Intent(view.getContext(), LoginActivity.class);
+        }else{
+            intent=new Intent(view.getContext(), CollectActivity.class);
+        }
         view.getContext().startActivity(intent);
     }
 

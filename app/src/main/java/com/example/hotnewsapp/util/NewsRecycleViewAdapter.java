@@ -24,6 +24,7 @@ public class NewsRecycleViewAdapter extends RecyclerView.Adapter<NewsRecycleView
     private List<News> newsList;
     private static final int HOME = 0;
     private static final int INTRO = 1;
+    private static final int EMPTY=2;
     int type;
 
     public void putNewsList(List<News> newsList,int type){
@@ -35,7 +36,9 @@ public class NewsRecycleViewAdapter extends RecyclerView.Adapter<NewsRecycleView
     public int getItemViewType(int position) {
         if ( type== 0) {
             return HOME;
-        } else return INTRO;
+        } else if(type==1) {
+            return INTRO;
+        }else return EMPTY;
 
 
     }
@@ -61,6 +64,12 @@ public class NewsRecycleViewAdapter extends RecyclerView.Adapter<NewsRecycleView
                 ViewDataBinding introBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.layout_search_introduce_item, parent, false);
                 viewHolder = new ViewHolder(introBinding);
                 View intro=LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_search_introduce_item,parent,false);
+                break;
+            case EMPTY:
+                ViewDataBinding emptyBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.layout_collect_empty, parent, false);
+                viewHolder = new ViewHolder(emptyBinding);
+                View empty=LayoutInflater.from(parent.getContext()).inflate(R.layout.
+                        layout_collect_empty,parent,false);
                 break;
             default:
                 return null;

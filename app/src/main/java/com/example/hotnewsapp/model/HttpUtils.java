@@ -151,4 +151,16 @@ public class HttpUtils {
         newsList=gson.fromJson(resultStr,new TypeToken<List<News>>(){}.getType());
         return newsList;
     }
+
+    public static State delCollect(String email,int id){
+        String strUrl="http://47.106.76.106:8080/hotNewsSys/favorites/del?email="+email+"&id="+id;
+        resultStr=send(strUrl);
+        return gson.fromJson(resultStr,State.class);
+    }
+
+    public static State addCollect(String email,int id){
+        String strUrl="http://47.106.76.106:8080/hotNewsSys/favorites/add?email="+email+"&id="+id;
+        resultStr=send(strUrl);
+        return gson.fromJson(resultStr,State.class);
+    }
 }

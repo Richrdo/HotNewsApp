@@ -67,5 +67,7 @@ public class UserFragment extends Fragment {
             intent.putExtra("userViewModel", userViewModel);
             v.getContext().startActivity(intent);
         });
+
+
     }
 }

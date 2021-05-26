@@ -13,6 +13,7 @@ import com.example.hotnewsapp.entity.LoginUser;
 import com.example.hotnewsapp.entity.State;
 import com.example.hotnewsapp.model.HttpUtils;
 import com.example.hotnewsapp.model.LoginModel;
+import com.example.hotnewsapp.model.UserModel;
 import com.example.hotnewsapp.util.Tools;
 import com.example.hotnewsapp.view.activity.HomeActivity;
 import com.example.hotnewsapp.view.activity.RegisterActivity;
@@ -59,6 +60,8 @@ public class LoginViewModel extends BaseObservable {
         if (state.getCode()==200){
             Intent intent=new Intent(view.getContext(), HomeActivity.class);
             Tools.loginUser=loginUser;
+            UserModel.loginUser=loginUser;
+            UserModel.collection=HttpUtils.getCollectNews(email);
             view.getContext().startActivity(intent);
         }
         Toast.makeText(view.getContext(), state.getMessage(), Toast.LENGTH_LONG).show();

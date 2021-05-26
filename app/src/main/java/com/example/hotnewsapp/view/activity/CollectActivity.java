@@ -23,16 +23,13 @@ public class CollectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activityCollectBinding= DataBindingUtil.setContentView(this,R.layout.activity_collect);
         newsRecycleViewAdapter=new NewsRecycleViewAdapter(getApplicationContext());
-
         initView();
     }
 
     private void initView(){
         activityCollectBinding.collectRv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
         activityCollectBinding.collectRv.setAdapter(newsRecycleViewAdapter);
         NewsRecyclerViewModel newsRecyclerViewModel=new NewsRecyclerViewModel(getApplication(),activityCollectBinding, Tools.loginUser.getEmail());
-
         activityCollectBinding.setViewModel(newsRecyclerViewModel);
     }
 }

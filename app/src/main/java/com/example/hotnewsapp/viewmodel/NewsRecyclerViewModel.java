@@ -14,9 +14,12 @@ import com.example.hotnewsapp.databinding.FragmentDomesticBinding;
 import com.example.hotnewsapp.databinding.FragmentInternationalBinding;
 import com.example.hotnewsapp.databinding.FragmentSearchActionBinding;
 import com.example.hotnewsapp.databinding.FragmentSocialBinding;
+import com.example.hotnewsapp.entity.News;
 import com.example.hotnewsapp.model.HttpUtils;
 import com.example.hotnewsapp.model.NewsModel;
 import com.example.hotnewsapp.util.NewsRecycleViewAdapter;
+
+import java.util.List;
 
 import static com.example.hotnewsapp.model.HttpUtils.TAG;
 
@@ -61,7 +64,14 @@ public class NewsRecyclerViewModel extends AndroidViewModel {
         super(application);
         NewsRecycleViewAdapter adapter=(NewsRecycleViewAdapter)binding.collectRv.getAdapter();
         assert adapter != null;
-        adapter.putNewsList(newsModel.getCollectNews(email),0);
+        int type=0;
+        List<News> List=newsModel.getCollectNews(email);
+        if(List.isEmpty()){
+            News news=new News();
+            List.add(news);
+            type=2;
+        }
+        adapter.putNewsList(List,type);
     }
 
 }

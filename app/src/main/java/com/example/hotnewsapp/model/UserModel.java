@@ -1,24 +1,21 @@
 package com.example.hotnewsapp.model;
 
+import android.util.Log;
+
 import com.example.hotnewsapp.entity.LoginUser;
+import com.example.hotnewsapp.entity.News;
 import com.example.hotnewsapp.entity.State;
 import com.google.gson.Gson;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class UserModel implements Serializable {
 
-    private static LoginUser loginUser=null;
+    public static LoginUser loginUser=null;
     static Gson gson=new Gson();
+    public static List<News> collection=null;
     static State state;
-
-    public LoginUser getLoginUser() {
-        return loginUser;
-    }
-
-    public void setLoginUser(LoginUser loginUser) {
-        this.loginUser = loginUser;
-    }
 
     public String getLoginUserEmail(){
         return  loginUser.getEmail();
@@ -27,6 +24,8 @@ public class UserModel implements Serializable {
     public String getLoginUserName(){
         return getUserMessage(loginUser.getEmail());
     }
+
+
 
     public static String getUserMessage(String email){
         loginUser=new LoginUser();
@@ -52,4 +51,23 @@ public class UserModel implements Serializable {
         return loginUser.getName();
     }
 
+    public static State addCollect(int newsId){
+        Log.i("UserModer","addCollect");
+        State state = HttpUtils.addCollect(UserModel.loginUser.getEmail(), newsId);
+        Log.i("UserModer","http state:"+state.getMessage());
+
+        //刷新收藏列表
+        collection = HttpUtils.getCollectNews(loginUser.getEmail());
+        return state;
+    }
+
+    public static State deleteCollect(int newsId){
+        Log.i("UserModer","deleteCollect");
+        State state=HttpUtils.delCollect(UserModel.loginUser.getEmail(),newsId);
+        Log.i("UserModer","http state:"+state.getMessage());
+
+        //刷新收藏列表
+        collection = HttpUtils.getCollectNews(loginUser.getEmail());
+        return state;
+    }
 }

@@ -19,7 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@color/white"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+
+            >
             <LinearLayout
                 android:layout_weight="3"
                 android:layout_width="0dp"
@@ -56,9 +58,10 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@color/white"
-            android:onClick="@{userViewModel.showCollect}"
+            android:onClick="@{userViewModel::showCollect}"
             android:gravity="center_vertical"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            >
             <LinearLayout
                 android:layout_weight="3"
                 android:layout_width="0dp"
